@@ -10,7 +10,7 @@ import {
   pgEnum,
   primaryKey,
 } from "drizzle-orm/pg-core";
-import type { AdapterAccountType } from "next-auth/adapters";
+import type { AdapterAccount } from "next-auth/adapters";
 
 // -------------------- Enums --------------------
 export const articleStatusEnum = pgEnum("article_status", [
@@ -47,7 +47,7 @@ export const accounts = pgTable(
     userId: uuid("user_id")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: varchar("type", { length: 50 }).$type<AdapterAccountType>().notNull(),
+    type: varchar("type", { length: 50 }).$type<AdapterAccount["type"]>().notNull(),
     provider: varchar("provider", { length: 50 }).notNull(),
     providerAccountId: varchar("provider_account_id", { length: 300 }).notNull(),
     refresh_token: text("refresh_token"),
