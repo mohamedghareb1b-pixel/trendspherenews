@@ -1,0 +1,40 @@
+{
+  "name": "trendsphere-os",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "drizzle-orm": "^0.30.10",
+    "postgres": "^3.4.4",
+    "zod": "^3.23.8",
+    "nanoid": "^5.0.7",
+    "date-fns": "^3.6.0",
+    "next-auth": "^4.24.7",
+    "@supabase/supabase-js": "^2.43.4",
+    "sharp": "^0.33.4",
+    "nodemailer": "^7.0.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@types/nodemailer": "^6.4.15",
+    "tailwindcss": "^3.4.3",
+    "postcss": "^8.4.38",
+    "autoprefixer": "^10.4.19",
+    "@tailwindcss/typography": "^0.5.13",
+    "drizzle-kit": "^0.21.4"
+  }
+}
