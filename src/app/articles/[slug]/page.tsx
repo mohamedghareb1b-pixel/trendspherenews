@@ -11,6 +11,8 @@ import {
 } from "@/lib/seo";
 import { ViewTracker } from "@/components/ViewTracker";
 import { AdSlot } from "@/components/AdSlot";
+import { SocialFollowPrompt } from "@/components/SocialFollowPrompt";
+import { SITE_SETTING_KEYS } from "@/application/use-cases/SiteSettingsUseCases";
 
 interface Props {
   params: { slug: string };
@@ -65,9 +67,17 @@ export default async function ArticlePage({ params }: Props) {
     { name: article.title, url: `${getSiteUrl()}/articles/${article.slug}` },
   ]);
 
+  const settings = await container.getSiteSettings.execute();
+
   return (
     <>
       <ViewTracker articleId={article.id} path={`/articles/${article.slug}`} />
+      <SocialFollowPrompt
+        threadsUrl={settings[SITE_SETTING_KEYS.SOCIAL_THREADS_URL]}
+        facebookUrl={settings[SITE_SETTING_KEYS.SOCIAL_FACEBOOK_URL]}
+        twitterUrl={settings[SITE_SETTING_KEYS.SOCIAL_TWITTER_URL]}
+        substackUrl={settings[SITE_SETTING_KEYS.SOCIAL_SUBSTACK_URL]}
+      />
       <script {...jsonLdScriptProps(articleJsonLd(article))} />
       <script {...jsonLdScriptProps(breadcrumb)} />
       {faq && <script {...jsonLdScriptProps(faq)} />}

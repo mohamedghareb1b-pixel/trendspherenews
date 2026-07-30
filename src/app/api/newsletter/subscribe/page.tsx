@@ -1,20 +1,13 @@
 import Link from "next/link";
 import { container } from "@/lib/container";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { AdSlot } from "@/components/AdSlot";
 
 export const revalidate = 60; // ISR - refreshes every minute
 
-interface HomePageProps {
-  searchParams: { category?: string };
-}
-
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const selectedCategory = searchParams.category;
-
+export default async function HomePage() {
   const [articles, categories] = await Promise.all([
-    container.getArticles.execute(
-      selectedCategory ? { categoryId: selectedCategory } : {}
-    ),
+    container.getArticles.execute(),
     container.listCategories.execute(),
   ]);
 
@@ -23,34 +16,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       <h1 className="text-3xl font-bold">Latest Articles</h1>
 
       <AdSlot slotKey="homepage_hero" />
-
-      {categories.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          <Link
-            href="/"
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-              !selectedCategory
-                ? "bg-brand-700 text-white"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
-          >
-            All
-          </Link>
-          {categories.map((c) => (
-            <Link
-              key={c.id}
-              href={`/?category=${c.id}`}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
-                selectedCategory === c.id
-                  ? "bg-brand-700 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-            >
-              {c.name}
-            </Link>
-          ))}
-        </div>
-      )}
 
       {articles.length === 0 && (
         <p className="text-gray-500">
@@ -89,6 +54,10 @@ export default async function HomePage({ searchParams }: HomePageProps) {
       </div>
 
       <AdSlot slotKey="homepage_feed" />
+
+      <NewsletterSignup
+        categories={categories.map((c) => ({ id: c.id, name: c.name }))}
+      />
     </div>
   );
 }

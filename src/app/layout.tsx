@@ -58,10 +58,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <script {...jsonLdScriptProps(websiteJsonLd())} />
         <AuthProvider>
           <header className="border-b border-gray-100 py-4">
-            <div className="mx-auto max-w-5xl px-4">
+            <div className="mx-auto flex max-w-5xl items-center gap-3 px-4">
               <Link href="/" className="text-xl font-bold text-brand-700">
                 TrendSphere
               </Link>
+              {settings[SITE_SETTING_KEYS.HEADER_BADGE_TEXT] && (
+                <span className="rounded-full bg-gradient-to-r from-amber-400 to-pink-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
+                  {settings[SITE_SETTING_KEYS.HEADER_BADGE_TEXT]}
+                </span>
+              )}
             </div>
           </header>
           <main id="main-content" className="mx-auto max-w-5xl px-4 py-8">

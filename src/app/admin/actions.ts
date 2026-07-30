@@ -160,6 +160,11 @@ export async function updateSiteSettingsAction(formData: FormData) {
     "google_site_verification",
     "bing_site_verification",
     "adsense_publisher_id",
+    "social_threads_url",
+    "social_facebook_url",
+    "social_twitter_url",
+    "social_substack_url",
+    "header_badge_text",
   ];
 
   for (const key of keys) {

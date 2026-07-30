@@ -82,6 +82,64 @@ export default async function SettingsPage() {
           </div>
         </div>
 
+        <div className="rounded-xl border border-gray-100 p-4">
+          <h2 className="mb-3 font-medium">Header Badge</h2>
+          <div>
+            <label className="mb-1 block text-sm">Eye-catching text next to the site name</label>
+            <input
+              name="header_badge_text"
+              defaultValue={settings[SITE_SETTING_KEYS.HEADER_BADGE_TEXT]}
+              placeholder="e.g. 🔥 Breaking News Daily"
+              className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+            />
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-gray-100 p-4">
+          <h2 className="mb-3 font-medium">Social Follow Links</h2>
+          <p className="mb-3 text-xs text-gray-400">
+            Shown to readers 1 minute into an article. Leave empty to hide an icon.
+          </p>
+          <div className="space-y-3">
+            <div>
+              <label className="mb-1 block text-sm">Threads URL</label>
+              <input
+                name="social_threads_url"
+                defaultValue={settings[SITE_SETTING_KEYS.SOCIAL_THREADS_URL]}
+                placeholder="https://threads.net/@yourpage"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-sm"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm">Facebook Page URL</label>
+              <input
+                name="social_facebook_url"
+                defaultValue={settings[SITE_SETTING_KEYS.SOCIAL_FACEBOOK_URL]}
+                placeholder="https://facebook.com/yourpage"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-sm"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm">Twitter / X URL</label>
+              <input
+                name="social_twitter_url"
+                defaultValue={settings[SITE_SETTING_KEYS.SOCIAL_TWITTER_URL]}
+                placeholder="https://x.com/yourpage"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-sm"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm">Substack URL</label>
+              <input
+                name="social_substack_url"
+                defaultValue={settings[SITE_SETTING_KEYS.SOCIAL_SUBSTACK_URL]}
+                placeholder="https://yourpage.substack.com"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-sm"
+              />
+            </div>
+          </div>
+        </div>
+
         <button
           type="submit"
           className="rounded-lg bg-brand-500 px-5 py-2.5 font-medium text-white hover:bg-brand-700"

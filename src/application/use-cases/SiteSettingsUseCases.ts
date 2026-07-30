@@ -7,6 +7,11 @@ export const SITE_SETTING_KEYS = {
   GOOGLE_SITE_VERIFICATION: "google_site_verification",
   BING_SITE_VERIFICATION: "bing_site_verification",
   ADSENSE_PUBLISHER_ID: "adsense_publisher_id",
+  SOCIAL_THREADS_URL: "social_threads_url",
+  SOCIAL_FACEBOOK_URL: "social_facebook_url",
+  SOCIAL_TWITTER_URL: "social_twitter_url",
+  SOCIAL_SUBSTACK_URL: "social_substack_url",
+  HEADER_BADGE_TEXT: "header_badge_text",
 } as const;
 
 export class GetSiteSettingsUseCase {
@@ -38,6 +43,16 @@ export class GetSiteSettingsUseCase {
         dbSettings[SITE_SETTING_KEYS.ADSENSE_PUBLISHER_ID] ??
         process.env.ADSENSE_PUBLISHER_ID ??
         "",
+      [SITE_SETTING_KEYS.SOCIAL_THREADS_URL]:
+        dbSettings[SITE_SETTING_KEYS.SOCIAL_THREADS_URL] ?? "",
+      [SITE_SETTING_KEYS.SOCIAL_FACEBOOK_URL]:
+        dbSettings[SITE_SETTING_KEYS.SOCIAL_FACEBOOK_URL] ?? "",
+      [SITE_SETTING_KEYS.SOCIAL_TWITTER_URL]:
+        dbSettings[SITE_SETTING_KEYS.SOCIAL_TWITTER_URL] ?? "",
+      [SITE_SETTING_KEYS.SOCIAL_SUBSTACK_URL]:
+        dbSettings[SITE_SETTING_KEYS.SOCIAL_SUBSTACK_URL] ?? "",
+      [SITE_SETTING_KEYS.HEADER_BADGE_TEXT]:
+        dbSettings[SITE_SETTING_KEYS.HEADER_BADGE_TEXT] ?? "",
     };
   }
 }
