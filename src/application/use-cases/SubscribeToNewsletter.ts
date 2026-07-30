@@ -46,7 +46,13 @@ export class SubscribeToNewsletterUseCase {
       );
     }
 
-    await sendVerificationEmail(subscriber.email, verificationToken);
+    try {
+      await sendVerificationEmail(subscriber.email, verificationToken);
+    } catch (error) {
+      // مش هنوقف عملية الاشتراك بسبب فشل الإيميل - البيانات اتخزنت بالفعل
+      // ونقدر نبعت لينك التحقق يدويًا أو نعيد المحاولة لاحقًا
+      console.error("Failed to send verification email:", error);
+    }
 
     return { status: "sent" };
   }
