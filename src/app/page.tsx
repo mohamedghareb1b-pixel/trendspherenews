@@ -55,7 +55,9 @@ export default async function HomePage() {
 
       <AdSlot slotKey="homepage_feed" />
 
-      <NewsletterSignup categories={categories} />
+      <NewsletterSignup
+        categories={categories.map((c) => ({ id: c.id, name: c.name }))}
+      />
     </div>
   );
 }
