@@ -20,6 +20,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/admin/tags">Tags</Link>
           <Link href="/admin/analytics">Analytics</Link>
           <Link href="/admin/ads">Ads</Link>
+          <Link href="/admin/settings">Settings</Link>
           <Link href="/admin/articles/new" className="text-brand-500">
             + New Article
           </Link>

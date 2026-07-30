@@ -6,7 +6,10 @@ import { AdSlot } from "@/components/AdSlot";
 export const revalidate = 60; // ISR - refreshes every minute
 
 export default async function HomePage() {
-  const articles = await container.getArticles.execute();
+  const [articles, categories] = await Promise.all([
+    container.getArticles.execute(),
+    container.listCategories.execute(),
+  ]);
 
   return (
     <div className="space-y-6">
@@ -52,7 +55,7 @@ export default async function HomePage() {
 
       <AdSlot slotKey="homepage_feed" />
 
-      <NewsletterSignup />
+      <NewsletterSignup categories={categories} />
     </div>
   );
 }

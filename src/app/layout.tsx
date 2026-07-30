@@ -8,30 +8,39 @@ import { organizationJsonLd, websiteJsonLd, jsonLdScriptProps } from "@/lib/seo"
 import { AnalyticsScripts } from "@/components/AnalyticsScripts";
 import { AdSlot } from "@/components/AdSlot";
 import { CookieConsent } from "@/components/CookieConsent";
+import { container } from "@/lib/container";
+import { SITE_SETTING_KEYS } from "@/application/use-cases/SiteSettingsUseCases";
 
 const bodyFont = Inter({ subsets: ["latin"], variable: "--font-body" });
 const headingFont = Lora({ subsets: ["latin"], variable: "--font-heading" });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(getSiteUrl()),
-  title: {
-    default: "TrendSphere",
-    template: "%s | TrendSphere",
-  },
-  description: "An intelligent publishing platform that turns every article into a full content network.",
-  alternates: {
-    canonical: "/",
-    types: { "application/rss+xml": "/rss.xml" },
-  },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-    other: {
-      "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ?? "",
-    },
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await container.getSiteSettings.execute();
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return {
+    metadataBase: new URL(getSiteUrl()),
+    title: {
+      default: "TrendSphere",
+      template: "%s | TrendSphere",
+    },
+    description:
+      "An intelligent publishing platform that turns every article into a full content network.",
+    alternates: {
+      canonical: "/",
+      types: { "application/rss+xml": "/rss.xml" },
+    },
+    verification: {
+      google: settings[SITE_SETTING_KEYS.GOOGLE_SITE_VERIFICATION] || undefined,
+      other: {
+        "msvalidate.01": settings[SITE_SETTING_KEYS.BING_SITE_VERIFICATION] || "",
+      },
+    },
+  };
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const settings = await container.getSiteSettings.execute();
+
   return (
     <html lang="en" dir="ltr" className={`${bodyFont.variable} ${headingFont.variable}`}>
       <body className="font-sans">
@@ -41,7 +50,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
-        <AnalyticsScripts />
+        <AnalyticsScripts
+          gaId={settings[SITE_SETTING_KEYS.GA_MEASUREMENT_ID]}
+          clarityId={settings[SITE_SETTING_KEYS.CLARITY_ID]}
+        />
         <script {...jsonLdScriptProps(organizationJsonLd())} />
         <script {...jsonLdScriptProps(websiteJsonLd())} />
         <AuthProvider>
@@ -64,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               className="mb-3 flex flex-wrap justify-center gap-4"
             >
               <Link href="/about">About</Link>
+              <Link href="/contact">Contact</Link>
               <Link href="/privacy-policy">Privacy Policy</Link>
               <Link href="/terms-of-service">Terms of Service</Link>
               <Link href="/cookie-policy">Cookie Policy</Link>

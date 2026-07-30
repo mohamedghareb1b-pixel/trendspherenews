@@ -41,6 +41,12 @@ import {
 import { DrizzleAdSlotRepository } from "@/infrastructure/repositories/DrizzleAdSlotRepository";
 import { UploadArticleImageUseCase } from "@/application/use-cases/UploadArticleImage";
 import { SupabaseImageStorage } from "@/infrastructure/storage/SupabaseImageStorage";
+import {
+  GetSiteSettingsUseCase,
+  UpsertSiteSettingUseCase,
+} from "@/application/use-cases/SiteSettingsUseCases";
+import { DrizzleSiteSettingsRepository } from "@/infrastructure/repositories/DrizzleSiteSettingsRepository";
+import { NotifySubscribersOfNewArticleUseCase } from "@/application/use-cases/NotifySubscribersOfNewArticle";
 
 /**
  * نقطة واحدة لتجميع الـ Use Cases مع تنفيذاتها.
@@ -54,6 +60,7 @@ const tagRepository = new DrizzleTagRepository();
 const analyticsRepository = new DrizzleAnalyticsRepository();
 const adSlotRepository = new DrizzleAdSlotRepository();
 const imageStorage = new SupabaseImageStorage();
+const siteSettingsRepository = new DrizzleSiteSettingsRepository();
 
 export const container = {
   createArticle: new CreateArticleUseCase(articleRepository),
@@ -90,4 +97,13 @@ export const container = {
   upsertAdSlot: new UpsertAdSlotUseCase(adSlotRepository),
 
   uploadArticleImage: new UploadArticleImageUseCase(imageStorage),
+
+  getSiteSettings: new GetSiteSettingsUseCase(siteSettingsRepository),
+  upsertSiteSetting: new UpsertSiteSettingUseCase(siteSettingsRepository),
+
+  notifySubscribersOfNewArticle: new NotifySubscribersOfNewArticleUseCase(
+    articleRepository,
+    categoryRepository,
+    subscriberRepository
+  ),
 };

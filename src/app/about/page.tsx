@@ -45,7 +45,7 @@ export default function AboutPage() {
       </p>
       <p>
         We do not publish content we believe to be false or misleading, and we correct errors
-        promptly when they're brought to our attention (see "Corrections" below).
+        promptly when they're brought to our attention (see &quot;Corrections&quot; below).
       </p>
 
       <h2>Editorial Standards</h2>
@@ -65,7 +65,8 @@ export default function AboutPage() {
 
       <h2>Contact Us</h2>
       <p>
-        Questions, feedback, or press inquiries? Reach us at{" "}
+        Questions, feedback, or press inquiries? Reach us via our{" "}
+        <a href="/contact">Contact page</a> or at{" "}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. For copyright concerns, see our{" "}
         <a href="/dmca">DMCA Policy</a>.
       </p>

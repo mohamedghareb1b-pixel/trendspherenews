@@ -204,6 +204,41 @@ CONTACT_EMAIL=your-real-email@example.com
 - `[your main topics]` - المجالات اللي موقعك بيغطيها فعليًا
 - `[Your Name]` و الجملة اللي بعدها - اسمك وخلفيتك الحقيقية
 
+### Phase 14 — Contact Us Page (Real Email Delivery)
+- [x] صفحة `/contact` جديدة - فورم حقيقي (اسم، إيميل، رسالة) بيبعت إيميل فعلي مش mailto بس
+- [x] الإيميل بيوصل لنفس `CONTACT_EMAIL` الموحّد، وبيستخدم نفس `EMAIL_SERVER`/`EMAIL_FROM` بتوع النشرة البريدية - مفيش إعداد إضافي مطلوب
+- [x] لو الإرسال فشل لأي سبب، الصفحة بتوضح إيميل بديل يتواصل بيه مباشرة
+- [x] مضافة في الفوتر والـ sitemap وصفحة About
+
+**تأكيد على سؤالك:** تسجيل الدخول (`/signin`) بقى يوزرنيم/باسورد بس من زمان - مفيش إيميل أو Magic Link فيه خالص. خانة الإيميل الوحيدة الباقية في الموقع هي الاشتراك في النشرة البريدية في الصفحة الرئيسية، وده مقصود ومنفصل تمامًا عن تسجيل الدخول.
+
+### Phase 15 — Admin Settings, Category-Based Newsletter, Automatic Sending
+**Google/Analytics Settings من الأدمن:**
+- [x] `/admin/settings` - حط Google Search Console verification, Bing verification, GA4 ID, Clarity ID, AdSense Publisher ID من المتصفح مباشرة
+- [x] التغييرات بتشتغل فورًا من غير أي `redeploy` - مش محتاج تلمس `.env` أو تعيد نشر المشروع تاني
+- [x] لو سبت أي حقل فاضي في لوحة التحكم، بيرجع تلقائي لقيمة `.env` المقابلة (fallback) - مفيش حاجة بتتكسر
+
+**النشرة البريدية بالتصنيف:**
+- [x] الزائر بيختار التصنيفات اللي يهمه (checkboxes) وقت الاشتراك - مش هيوصله إلا محتوى التصنيفات دي بس
+- [x] لازم يختار تصنيف واحد على الأقل عشان يقدر يشترك
+
+**الإرسال التلقائي (مجاني تمامًا):**
+- [x] لما تدوس "Publish Now" على أي مقال، بيتبعت أوتوماتيك إيميل لكل مشترك مؤكد (verified) مهتم بتصنيف المقال ده
+- [x] بيستخدم نفس SMTP المُعد أصلاً للنشرة (`EMAIL_SERVER`) - **مفيش أي تكلفة أو خدمة إضافية**، ولا حاجة تتضبط يدوي كل مرة
+- [x] الإرسال بيحصل بالتتابع (واحد واحد) مش كلهم مرة واحدة، عشان ميحصلش rate limit مع مزود الإيميل
+
+**⚠️ SQL لازم تشغّله في Supabase:**
+```sql
+CREATE TABLE site_settings (
+  key VARCHAR(100) PRIMARY KEY,
+  value TEXT,
+  updated_at TIMESTAMP NOT NULL DEFAULT now()
+);
+```
+(موجود في ملف `add-site-settings-table.sql` المرفق)
+
+**ملاحظة صريحة عن التوسع مستقبلًا:** الطريقة دي ممتازة ومجانية لحد كام مية مشترك. لو يومًا ما وصلت لآلاف المشتركين، مزود SMTP العادي (زي Resend الفري) هيبدأ يحدد عدد الإيميلات المسموح بيه يوميًا - وقتها هتحتاج تفكر في خدمة إرسال جماعي مخصصة (زي Resend Broadcast أو Mailchimp)، مش قبل كده.
+
 ## The rest of the original PRD
 
 1. **Social Distribution**: auto-generate social posts on publish

@@ -122,6 +122,13 @@ CREATE TABLE ad_slots (
   updated_at TIMESTAMP NOT NULL DEFAULT now()
 );
 
+-- Site Settings (Google/Analytics keys, editable from Admin)
+CREATE TABLE site_settings (
+  key VARCHAR(100) PRIMARY KEY,
+  value TEXT,
+  updated_at TIMESTAMP NOT NULL DEFAULT now()
+);
+
 -- Newsletter Subscribers
 CREATE TABLE subscribers (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

@@ -10,7 +10,7 @@ import {
   pgEnum,
   primaryKey,
 } from "drizzle-orm/pg-core";
-import type { AdapterAccount } from "next-auth/adapters";
+import type { AdapterAccountType } from "next-auth/adapters";
 
 // -------------------- Enums --------------------
 export const articleStatusEnum = pgEnum("article_status", [
@@ -47,7 +47,7 @@ export const accounts = pgTable(
     userId: uuid("user_id")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: varchar("type", { length: 50 }).$type<AdapterAccount["type"]>().notNull(),
+    type: varchar("type", { length: 50 }).$type<AdapterAccountType>().notNull(),
     provider: varchar("provider", { length: 50 }).notNull(),
     providerAccountId: varchar("provider_account_id", { length: 300 }).notNull(),
     refresh_token: text("refresh_token"),
@@ -173,6 +173,13 @@ export const adSlots = pgTable("ad_slots", {
   enabled: boolean("enabled").default(false).notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+// -------------------- Site Settings (Google/Analytics keys, editable from Admin) --------------------
+export const siteSettings = pgTable("site_settings", {
+  key: varchar("key", { length: 100 }).primaryKey(),
+  value: text("value"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 // -------------------- Newsletter Subscribers --------------------
 export const subscriberStatusEnum = pgEnum("subscriber_status", [
   "pending", // لسه ما أكدش الإيميل

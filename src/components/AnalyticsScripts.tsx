@@ -7,8 +7,17 @@ import { CONSENT_EVENT, ConsentValue, getStoredConsent } from "@/lib/consent";
 /**
  * السكريبتات دي (GA4, Clarity) مش بتتحمل خالص لحد ما المستخدم يوافق
  * على الكوكيز غير الأساسية من الـ Cookie Consent banner.
+ * الـ IDs بتيجي كـ props من الـ layout (اللي بيجيبهم من لوحة التحكم/قاعدة
+ * البيانات) بدل ما تتقرا من env مباشرة - يعني تقدر تغيّرهم من /admin/settings
+ * من غير ما تحتاج تعمل redeploy للمشروع.
  */
-export function AnalyticsScripts() {
+export function AnalyticsScripts({
+  gaId,
+  clarityId,
+}: {
+  gaId?: string;
+  clarityId?: string;
+}) {
   const [consent, setConsent] = useState<ConsentValue | null>(null);
 
   useEffect(() => {
@@ -21,9 +30,6 @@ export function AnalyticsScripts() {
     window.addEventListener(CONSENT_EVENT, handleChange);
     return () => window.removeEventListener(CONSENT_EVENT, handleChange);
   }, []);
-
-  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
-  const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
 
   if (consent !== "granted") return null;
 

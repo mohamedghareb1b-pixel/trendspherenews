@@ -96,6 +96,10 @@ export async function updateArticleAction(articleId: string, formData: FormData)
 export async function publishArticleAction(articleId: string) {
   await requireAdminSession();
   await container.publishArticle.execute(articleId);
+
+  // إشعار المشتركين المهتمين بتصنيف المقال ده - تلقائي، بدون أي تكلفة إضافية
+  await container.notifySubscribersOfNewArticle.execute(articleId);
+
   revalidatePath(`/admin/articles/${articleId}`);
   revalidatePath("/admin");
   revalidatePath("/");
@@ -145,4 +149,24 @@ export async function upsertAdSlotAction(formData: FormData) {
   await container.upsertAdSlot.execute({ key, name, code: code || null, enabled });
   revalidatePath("/admin/ads");
   revalidatePath("/");
+}
+
+export async function updateSiteSettingsAction(formData: FormData) {
+  await requireAdminSession();
+
+  const keys = [
+    "ga_measurement_id",
+    "clarity_id",
+    "google_site_verification",
+    "bing_site_verification",
+    "adsense_publisher_id",
+  ];
+
+  for (const key of keys) {
+    const value = String(formData.get(key) ?? "").trim();
+    await container.upsertSiteSetting.execute(key, value);
+  }
+
+  revalidatePath("/admin/settings");
+  revalidatePath("/", "layout");
 }
