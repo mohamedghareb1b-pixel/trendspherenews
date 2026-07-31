@@ -10,6 +10,21 @@ body {
   @apply bg-white text-gray-900 antialiased;
 }
 
+/* Comfortable reading mode - warm tone to reduce eye strain */
+html.reading-sepia {
+  background-color: #f4ecd8;
+}
+html.reading-sepia body {
+  background-color: #f4ecd8;
+  color: #3b2f1e;
+}
+html.reading-sepia article {
+  color: #3b2f1e;
+}
+html.reading-sepia article a {
+  color: #7a4a1e;
+}
+
 /* Accessibility: make keyboard focus clearly visible everywhere */
 a:focus-visible,
 button:focus-visible,
