@@ -165,6 +165,7 @@ export async function updateSiteSettingsAction(formData: FormData) {
     "social_twitter_url",
     "social_substack_url",
     "header_badge_text",
+    "background_music_url",
   ];
 
   for (const key of keys) {

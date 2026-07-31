@@ -12,6 +12,7 @@ export const SITE_SETTING_KEYS = {
   SOCIAL_TWITTER_URL: "social_twitter_url",
   SOCIAL_SUBSTACK_URL: "social_substack_url",
   HEADER_BADGE_TEXT: "header_badge_text",
+  BACKGROUND_MUSIC_URL: "background_music_url",
 } as const;
 
 export class GetSiteSettingsUseCase {
@@ -53,6 +54,8 @@ export class GetSiteSettingsUseCase {
         dbSettings[SITE_SETTING_KEYS.SOCIAL_SUBSTACK_URL] ?? "",
       [SITE_SETTING_KEYS.HEADER_BADGE_TEXT]:
         dbSettings[SITE_SETTING_KEYS.HEADER_BADGE_TEXT] ?? "",
+      [SITE_SETTING_KEYS.BACKGROUND_MUSIC_URL]:
+        dbSettings[SITE_SETTING_KEYS.BACKGROUND_MUSIC_URL] ?? "",
     };
   }
 }

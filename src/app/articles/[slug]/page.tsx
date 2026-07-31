@@ -13,6 +13,7 @@ import { ViewTracker } from "@/components/ViewTracker";
 import { AdSlot } from "@/components/AdSlot";
 import { SocialFollowPrompt } from "@/components/SocialFollowPrompt";
 import { ReadingModeToggle } from "@/components/ReadingModeToggle";
+import { BackgroundMusicToggle } from "@/components/BackgroundMusicToggle";
 import { SITE_SETTING_KEYS } from "@/application/use-cases/SiteSettingsUseCases";
 
 interface Props {
@@ -85,6 +86,7 @@ export default async function ArticlePage({ params }: Props) {
 
       <article className="prose prose-lg max-w-none">
         <ReadingModeToggle />
+        <BackgroundMusicToggle musicUrl={settings[SITE_SETTING_KEYS.BACKGROUND_MUSIC_URL]} />
         {category && (
           <a
             href={`/category/${category.slug}`}

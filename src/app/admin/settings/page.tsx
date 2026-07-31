@@ -83,6 +83,20 @@ export default async function SettingsPage() {
         </div>
 
         <div className="rounded-xl border border-gray-100 p-4">
+          <h2 className="mb-3 font-medium">Relaxing Background Music</h2>
+          <p className="mb-3 text-xs text-gray-400">
+            Direct link to an MP3 file (e.g. from Pixabay Music, Free Music Archive).
+            Readers can turn it on/off manually while reading an article.
+          </p>
+          <input
+            name="background_music_url"
+            defaultValue={settings[SITE_SETTING_KEYS.BACKGROUND_MUSIC_URL]}
+            placeholder="https://example.com/relax-track.mp3"
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-sm"
+          />
+        </div>
+
+        <div className="rounded-xl border border-gray-100 p-4">
           <h2 className="mb-3 font-medium">Header Badge</h2>
           <div>
             <label className="mb-1 block text-sm">Eye-catching text next to the site name</label>
