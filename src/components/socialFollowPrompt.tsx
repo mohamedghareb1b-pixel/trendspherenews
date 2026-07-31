@@ -9,11 +9,23 @@ interface SocialFollowPromptProps {
   substackUrl?: string;
 }
 
-const ICONS: Record<string, { label: string; emoji: string }> = {
-  threadsUrl: { label: "Threads", emoji: "🧵" },
-  facebookUrl: { label: "Facebook", emoji: "📘" },
-  twitterUrl: { label: "X / Twitter", emoji: "✖️" },
-  substackUrl: { label: "Substack", emoji: "✉️" },
+const ICONS: Record<string, { label: string; icon: string }> = {
+  threadsUrl: {
+    label: "Threads",
+    icon: "https://cdn.simpleicons.org/threads/000000",
+  },
+  facebookUrl: {
+    label: "Facebook",
+    icon: "https://cdn.simpleicons.org/facebook/1877F2",
+  },
+  twitterUrl: {
+    label: "X / Twitter",
+    icon: "https://cdn.simpleicons.org/x/000000",
+  },
+  substackUrl: {
+    label: "Substack",
+    icon: "https://cdn.simpleicons.org/substack/FF6719",
+  },
 };
 
 export function SocialFollowPrompt({
@@ -62,9 +74,14 @@ export function SocialFollowPrompt({
             target="_blank"
             rel="noopener noreferrer"
             title={ICONS[key].label}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 text-lg transition hover:scale-105 hover:bg-gray-100"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 p-2 transition hover:scale-105 hover:bg-gray-100"
           >
-            {ICONS[key].emoji}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={ICONS[key].icon}
+              alt={ICONS[key].label}
+              className="h-full w-full object-contain"
+            />
           </a>
         ))}
       </div>
