@@ -14,6 +14,7 @@ import { AdSlot } from "@/components/AdSlot";
 import { SocialFollowPrompt } from "@/components/SocialFollowPrompt";
 import { ReadingModeToggle } from "@/components/ReadingModeToggle";
 import { BackgroundMusicToggle } from "@/components/BackgroundMusicToggle";
+import { NewsletterInlinePrompt } from "@/components/NewsletterInlinePrompt";
 import { SITE_SETTING_KEYS } from "@/application/use-cases/SiteSettingsUseCases";
 
 interface Props {
@@ -139,7 +140,10 @@ export default async function ArticlePage({ params }: Props) {
         </div>
 
         {article.contentPart2 && (
-          <div dangerouslySetInnerHTML={{ __html: article.contentPart2 }} />
+          <>
+            <NewsletterInlinePrompt />
+            <div dangerouslySetInnerHTML={{ __html: article.contentPart2 }} />
+          </>
         )}
 
         {article.faq.length > 0 && (

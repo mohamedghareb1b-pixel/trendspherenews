@@ -88,8 +88,12 @@ export class DrizzleSubscriberRepository implements SubscriberRepository {
     const all = rows.map(toDomain);
     if (!categoryFilter || categoryFilter.length === 0) return all;
 
-    return all.filter((s) =>
-      s.preferredCategories.some((c) => categoryFilter.includes(c))
+    // مشترك من غير تصنيفات مفضلة (preferredCategories فاضية) = مهتم بكل حاجة،
+    // بيحصل ده حاليًا لأن اختيار التصنيف اتشال مؤقتًا من فورم الاشتراك.
+    return all.filter(
+      (s) =>
+        s.preferredCategories.length === 0 ||
+        s.preferredCategories.some((c) => categoryFilter.includes(c))
     );
   }
 }
