@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { container } from "@/lib/container";
 import { getSiteUrl } from "@/lib/site";
 
-export const revalidate = 3600; // يتحدث كل ساعة
+export const revalidate = 300; // يتحدث كل 5 دقايق بدل ساعة - عشان المقالات الجديدة تتفهرس أسرع
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const site = getSiteUrl();
