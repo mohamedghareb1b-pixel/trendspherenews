@@ -1,4 +1,3 @@
-import { after } from "next/server";
 import { ArticleRepository } from "@/domain/repositories/ArticleRepository";
 import { notifyGoogleIndexing } from "@/lib/googleIndexing";
 import { getSiteUrl } from "@/lib/site";
@@ -21,11 +20,10 @@ export class PublishArticleUseCase {
     article.publish();
     await this.articleRepository.update(article);
 
-    // بنبعت إشعار Google Indexing في الخلفية، من غير ما نستنى رده
-    // عشان زرار "نشر" في الأدمن يرد فورًا للمستخدم
+    // بنبعت إشعار Google Indexing من غير await - عشان زرار "نشر" يرد فورًا
     const url = `${getSiteUrl()}/articles/${article.slug}`;
-    after(async () => {
-      await notifyGoogleIndexing(url, "URL_UPDATED");
+    notifyGoogleIndexing(url, "URL_UPDATED").catch((error) => {
+      console.error("Failed to notify Google Indexing:", error);
     });
 
     // TODO (Phase 2+): dispatch content-distribution events here

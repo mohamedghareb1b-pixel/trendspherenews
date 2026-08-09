@@ -47,12 +47,13 @@ export class SubscribeToNewsletterUseCase {
       );
     }
 
-    try {
-      await sendWelcomeEmail(subscriber.email, subscriber.unsubscribeToken);
-    } catch (error) {
+    // بنبعت إيميل الترحيب من غير await - الرد بيرجع للزائر فورًا،
+    // والإيميل بيتبعت في الخلفية. (بديل متوافق مع كل نسخ Next.js،
+    // بدل after() اللي مش موجودة في النسخة الحالية عندك)
+    sendWelcomeEmail(subscriber.email, subscriber.unsubscribeToken).catch((error) => {
       // مش هنوقف عملية الاشتراك بسبب فشل الإيميل - البيانات اتخزنت بالفعل كـ verified
       console.error("Failed to send welcome email:", error);
-    }
+    });
 
     return { status: "verified" };
   }
