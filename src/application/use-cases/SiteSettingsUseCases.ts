@@ -6,6 +6,7 @@ export const SITE_SETTING_KEYS = {
   CLARITY_ID: "clarity_id",
   GOOGLE_SITE_VERIFICATION: "google_site_verification",
   BING_SITE_VERIFICATION: "bing_site_verification",
+  IMPACT_SITE_VERIFICATION: "impact_site_verification",
   ADSENSE_PUBLISHER_ID: "adsense_publisher_id",
   SOCIAL_THREADS_URL: "social_threads_url",
   SOCIAL_FACEBOOK_URL: "social_facebook_url",
@@ -39,6 +40,10 @@ export class GetSiteSettingsUseCase {
       [SITE_SETTING_KEYS.BING_SITE_VERIFICATION]:
         dbSettings[SITE_SETTING_KEYS.BING_SITE_VERIFICATION] ??
         process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ??
+        "",
+      [SITE_SETTING_KEYS.IMPACT_SITE_VERIFICATION]:
+        dbSettings[SITE_SETTING_KEYS.IMPACT_SITE_VERIFICATION] ??
+        process.env.NEXT_PUBLIC_IMPACT_SITE_VERIFICATION ??
         "",
       [SITE_SETTING_KEYS.ADSENSE_PUBLISHER_ID]:
         dbSettings[SITE_SETTING_KEYS.ADSENSE_PUBLISHER_ID] ??

@@ -33,6 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
       google: settings[SITE_SETTING_KEYS.GOOGLE_SITE_VERIFICATION] || undefined,
       other: {
         "msvalidate.01": settings[SITE_SETTING_KEYS.BING_SITE_VERIFICATION] || "",
+        "impact-site-verification": settings[SITE_SETTING_KEYS.IMPACT_SITE_VERIFICATION] || "",
       },
     },
   };
