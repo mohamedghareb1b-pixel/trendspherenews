@@ -17,15 +17,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${site}/dmca`, changeFrequency: "yearly", priority: 0.2 },
   ];
 
-  const [articles, categories, tags] = await Promise.all([
+  const [articles, categories] = await Promise.all([
     container.getArticles.execute({ limit: 5000 }),
     container.listCategories.execute(),
-    container.listTags.execute(),
   ]);
 
   const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => ({
     url: `${site}/articles/${article.slug}`,
-    lastModified: article.updatedAt,
+    ...(article.updatedAt ? { lastModified: new Date(article.updatedAt) } : {}),
     changeFrequency: "daily",
     priority: 0.8,
   }));
@@ -36,11 +35,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const tagRoutes: MetadataRoute.Sitemap = tags.map((t) => ({
-    url: `${site}/tag/${t.slug}`,
-    changeFrequency: "weekly",
-    priority: 0.4,
-  }));
+  // صفحات التاجات اتشالت من الـ sitemap عمدًا - بقت noindex لأنها بتتولد أوتوماتيك
+  // بالـ AI ومحتواها متكرر مع صفحات التصنيفات، فمفيش داعي نبعتها لجوجل أصلاً
 
-  return [...staticRoutes, ...articleRoutes, ...categoryRoutes, ...tagRoutes];
+  return [...staticRoutes, ...articleRoutes, ...categoryRoutes];
 }
