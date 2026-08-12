@@ -5,6 +5,7 @@ export interface UpdateArticleInput {
   title?: string;
   content?: string;
   contentPart2?: string;
+  ticketLink?: string;
   excerpt?: string;
   heroImageUrl?: string;
   secondaryImageUrl?: string;
@@ -33,6 +34,7 @@ export class UpdateArticleUseCase {
       article.calculateReadingTime();
     }
     if (input.excerpt !== undefined) article.excerpt = input.excerpt;
+    if (input.ticketLink !== undefined) article.ticketLink = input.ticketLink;
     if (input.heroImageUrl !== undefined) article.heroImageUrl = input.heroImageUrl;
     if (input.secondaryImageUrl !== undefined) article.secondaryImageUrl = input.secondaryImageUrl;
     if (input.metaTitle !== undefined) article.metaTitle = input.metaTitle;

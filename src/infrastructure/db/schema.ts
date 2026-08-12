@@ -121,6 +121,7 @@ export const articles = pgTable("articles", {
   excerpt: text("excerpt"),
   content: text("content").notNull(), // Part 1 - shown before the secondary image
   contentPart2: text("content_part_2"), // Part 2 - shown after the secondary image
+  ticketLink: text("ticket_link"), // رابط اختياري لبيع التذاكر (ماتشات/حفلات) - بيظهر في نهاية الجزء الأول من المحتوى قبل الصورة الثانية
   heroImageUrl: text("hero_image_url"),
   secondaryImageUrl: text("secondary_image_url"),
 

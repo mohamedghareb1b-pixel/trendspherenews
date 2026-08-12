@@ -7,6 +7,7 @@ export interface CreateArticleInput {
   slug: string;
   content: string;
   contentPart2?: string;
+  ticketLink?: string;
   authorId?: string;
   categoryId?: string;
   excerpt?: string;
@@ -51,7 +52,8 @@ export class CreateArticleUseCase {
       null,
       new Date(),
       new Date(),
-      input.contentPart2 ?? null
+      input.contentPart2 ?? null,
+      input.ticketLink ?? null
     );
 
     article.calculateReadingTime();

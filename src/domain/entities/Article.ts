@@ -30,7 +30,8 @@ export class Article {
     public publishedAt: Date | null = null,
     public createdAt: Date = new Date(),
     public updatedAt: Date = new Date(),
-    public contentPart2: string | null = null
+    public contentPart2: string | null = null,
+    public ticketLink: string | null = null
   ) {}
 
   publish(): void {

@@ -126,6 +126,22 @@ export default async function ArticlePage({ params }: Props) {
 
         <div dangerouslySetInnerHTML={{ __html: article.content }} />
 
+        {article.ticketLink && (
+          <p className="not-prose text-gray-700">
+            Still looking for tickets? Check current ticket availability{" "}
+            <a
+              href={article.ticketLink}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="font-semibold text-base underline decoration-2 underline-offset-2 text-brand-700 hover:text-brand-900"
+            >
+              here
+            </a>{" "}
+            on TicketNetwork. Resale tickets may still be available even when standard tickets
+            are sold out, although resale prices can be higher than face value.
+          </p>
+        )}
+
         {article.secondaryImageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
