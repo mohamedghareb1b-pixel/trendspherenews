@@ -37,13 +37,13 @@ export function NewsletterSignup({ onSubscribed }: { onSubscribed?: () => void }
   }
 
   return (
-    <div className="rounded-xl border border-gray-100 bg-brand-50 p-5">
+    <div className="w-full max-w-full overflow-hidden rounded-xl border border-gray-100 bg-brand-50 p-5">
       <h3 className="font-semibold">Subscribe to our newsletter</h3>
       <p className="mt-1 text-sm text-gray-600">
         Get our latest articles straight to your inbox.
       </p>
 
-      <form onSubmit={handleSubmit} className="mt-3 flex gap-2">
+      <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-2">
         <label htmlFor="newsletter-email" className="sr-only">
           Email address
         </label>
@@ -54,14 +54,14 @@ export function NewsletterSignup({ onSubscribed }: { onSubscribed?: () => void }
           placeholder="you@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm"
+          className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
         />
         <button
           type="submit"
           disabled={state === "loading"}
-          className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
+          className="w-full rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-700 disabled:opacity-50"
         >
-          {state === "loading" ? "..." : "Subscribe"}
+          {state === "loading" ? "Subscribing..." : "Subscribe"}
         </button>
       </form>
 

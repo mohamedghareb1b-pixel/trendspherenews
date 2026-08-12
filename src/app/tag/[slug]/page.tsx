@@ -13,10 +13,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `#${params.slug}`,
     alternates: { canonical: `${getSiteUrl()}/tag/${params.slug}` },
-    // التاجات بتتولد أوتوماتيك بالـ AI، فممكن يكون فيه تكرار كبير في المحتوى
-    // بين صفحات التاجات المختلفة - noindex بيمنع جوجل يفهرسها كمحتوى مكرر،
-    // مع إن الصفحة تفضل شغالة وقابلة للتصفح عاديًا للزوار
-    robots: { index: false, follow: true },
   };
 }
 

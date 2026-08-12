@@ -8,7 +8,6 @@ import { organizationJsonLd, websiteJsonLd, jsonLdScriptProps } from "@/lib/seo"
 import { AnalyticsScripts } from "@/components/AnalyticsScripts";
 import { AdSlot } from "@/components/AdSlot";
 import { CookieConsent } from "@/components/CookieConsent";
-import { VigLinkIntegration } from "@/components/VigLinkIntegration";
 import { container } from "@/lib/container";
 import { SITE_SETTING_KEYS } from "@/application/use-cases/SiteSettingsUseCases";
 
@@ -52,11 +51,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           Skip to main content
         </a>
-        {/* VigLink integration for Soven affiliate monetization */}
-        <VigLinkIntegration />
         <AnalyticsScripts
           gaId={settings[SITE_SETTING_KEYS.GA_MEASUREMENT_ID]}
           clarityId={settings[SITE_SETTING_KEYS.CLARITY_ID]}
+          sovrnKey={settings[SITE_SETTING_KEYS.SOVRN_KEY]}
         />
         <script {...jsonLdScriptProps(organizationJsonLd())} />
         <script {...jsonLdScriptProps(websiteJsonLd())} />
