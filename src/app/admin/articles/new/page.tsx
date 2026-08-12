@@ -80,6 +80,24 @@ export default async function NewArticlePage() {
           />
         </div>
 
+        {/* Ticket link (optional - for matches/events) */}
+        <div>
+          <label className="mb-1 block text-sm font-medium">
+            Ticket Link <span className="font-normal text-gray-400">(optional - matches/events only)</span>
+          </label>
+          <p className="mb-2 text-xs text-gray-500">
+            If filled, a ticket availability note with this link will appear automatically at the
+            end of Content Part 1, right before the secondary image. Leave empty for regular
+            articles.
+          </p>
+          <input
+            type="url"
+            name="ticketLink"
+            placeholder="https://www.ticketnetwork.com/..."
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+          />
+        </div>
+
         {/* Secondary image - shown in the middle of the article, between the two content parts */}
         <ImageUploadField
           name="secondaryImageUrl"
