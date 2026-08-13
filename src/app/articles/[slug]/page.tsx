@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { container } from "@/lib/container";
 import { getSiteUrl } from "@/lib/site";
+import type { Tag } from "@/domain/entities/Tag";
 import {
   articleJsonLd,
   faqJsonLd,
@@ -181,7 +182,7 @@ export default async function ArticlePage({ params }: Props) {
               {category.name}
             </a>
           )}
-          {tags.map((tag) => (
+          {tags.map((tag: Tag) => (
             <a
               key={tag.id}
               href={`/tag/${tag.slug}`}
