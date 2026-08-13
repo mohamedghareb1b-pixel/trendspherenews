@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { container } from "@/lib/container";
 import { getSiteUrl } from "@/lib/site";
 import type { Tag } from "@/domain/entities/Tag";
+import type { Article, FaqItem } from "@/domain/entities/Article";
 import {
   articleJsonLd,
   faqJsonLd,
@@ -164,7 +165,7 @@ export default async function ArticlePage({ params }: Props) {
         {article.faq.length > 0 && (
           <section>
             <h2>Frequently Asked Questions</h2>
-            {article.faq.map((item, i) => (
+            {article.faq.map((item: FaqItem, i: number) => (
               <div key={i}>
                 <h3>{item.question}</h3>
                 <p>{item.answer}</p>
@@ -197,7 +198,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="not-prose mt-8 border-t border-gray-100 pt-6">
             <h2 className="mb-4 text-xl font-bold">Related Articles</h2>
             <div className="grid gap-4 sm:grid-cols-2">
-              {recommendedArticles.map((rec) => (
+              {recommendedArticles.map((rec: Article) => (
                 <Link
                   key={rec.id}
                   href={`/articles/${rec.slug}`}
