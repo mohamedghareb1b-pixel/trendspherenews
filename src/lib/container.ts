@@ -3,11 +3,11 @@ import { DrizzleSubscriberRepository } from "@/infrastructure/repositories/Drizz
 import { CreateArticleUseCase } from "@/application/use-cases/CreateArticle";
 import {
   GetArticlesUseCase,
-  GetRelatedArticlesUseCase,
   GetArticleBySlugUseCase,
   GetArticleByIdUseCase,
   GetAllArticlesForAdminUseCase,
 } from "@/application/use-cases/GetArticles";
+import { GetRelatedArticlesUseCase } from "@/application/use-cases/GetRelatedArticles";
 import { PublishArticleUseCase } from "@/application/use-cases/PublishArticle";
 import { UpdateArticleUseCase } from "@/application/use-cases/UpdateArticle";
 import { SubscribeToNewsletterUseCase } from "@/application/use-cases/SubscribeToNewsletter";
