@@ -3,6 +3,7 @@ import { DrizzleSubscriberRepository } from "@/infrastructure/repositories/Drizz
 import { CreateArticleUseCase } from "@/application/use-cases/CreateArticle";
 import {
   GetArticlesUseCase,
+  GetRelatedArticlesUseCase,
   GetArticleBySlugUseCase,
   GetArticleByIdUseCase,
   GetAllArticlesForAdminUseCase,
@@ -65,6 +66,7 @@ const siteSettingsRepository = new DrizzleSiteSettingsRepository();
 export const container = {
   createArticle: new CreateArticleUseCase(articleRepository),
   getArticles: new GetArticlesUseCase(articleRepository),
+  getRelatedArticles: new GetRelatedArticlesUseCase(),
   getArticleBySlug: new GetArticleBySlugUseCase(articleRepository),
   getArticleById: new GetArticleByIdUseCase(articleRepository),
   getAllArticlesForAdmin: new GetAllArticlesForAdminUseCase(articleRepository),

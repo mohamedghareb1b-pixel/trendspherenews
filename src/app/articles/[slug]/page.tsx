@@ -54,15 +54,13 @@ export default async function ArticlePage({ params }: Props) {
   const article = await container.getArticleBySlug.execute(params.slug);
   if (!article || !article.isPublished()) notFound();
 
-  const [tags, category, recentArticles] = await Promise.all([
+  const [tags, category, relatedArticles] = await Promise.all([
     container.getArticleTags.execute(article.id),
     article.categoryId ? container.getCategoryById.execute(article.categoryId) : null,
-    container.getArticles.execute({ limit: 3 }),
+    container.getRelatedArticles.execute(article.id, article.categoryId, 4),
   ]);
 
-  const recommendedArticles = recentArticles
-    .filter((a) => a.id !== article.id)
-    .slice(0, 2);
+  const recommendedArticles = relatedArticles;
 
   const faq = faqJsonLd(article.faq);
   const breadcrumb = breadcrumbJsonLd([
@@ -196,7 +194,7 @@ export default async function ArticlePage({ params }: Props) {
 
         {recommendedArticles.length > 0 && (
           <div className="not-prose mt-8 border-t border-gray-100 pt-6">
-            <h2 className="mb-4 text-xl font-bold">Recommended For You</h2>
+            <h2 className="mb-4 text-xl font-bold">Related Articles</h2>
             <div className="grid gap-4 sm:grid-cols-2">
               {recommendedArticles.map((rec) => (
                 <Link
