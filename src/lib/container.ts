@@ -8,6 +8,7 @@ import {
   GetAllArticlesForAdminUseCase,
 } from "@/application/use-cases/GetArticles";
 import { GetRelatedArticlesUseCase } from "@/application/use-cases/GetRelatedArticles";
+import { GetAuthorByIdUseCase, GetDefaultAuthorUseCase } from "@/application/use-cases/GetAuthorById";
 import { PublishArticleUseCase } from "@/application/use-cases/PublishArticle";
 import { UpdateArticleUseCase } from "@/application/use-cases/UpdateArticle";
 import { SubscribeToNewsletterUseCase } from "@/application/use-cases/SubscribeToNewsletter";
@@ -67,6 +68,8 @@ export const container = {
   createArticle: new CreateArticleUseCase(articleRepository),
   getArticles: new GetArticlesUseCase(articleRepository),
   getRelatedArticles: new GetRelatedArticlesUseCase(),
+  getAuthorById: new GetAuthorByIdUseCase(),
+  getDefaultAuthor: new GetDefaultAuthorUseCase(),
   getArticleBySlug: new GetArticleBySlugUseCase(articleRepository),
   getArticleById: new GetArticleByIdUseCase(articleRepository),
   getAllArticlesForAdmin: new GetAllArticlesForAdminUseCase(articleRepository),

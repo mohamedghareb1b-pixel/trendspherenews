@@ -56,11 +56,15 @@ export default async function ArticlePage({ params }: Props) {
   const article = await container.getArticleBySlug.execute(params.slug);
   if (!article || !article.isPublished()) notFound();
 
-  const [tags, category, relatedArticles] = await Promise.all([
+  const [tags, category, relatedArticles, explicitAuthor] = await Promise.all([
     container.getArticleTags.execute(article.id),
     article.categoryId ? container.getCategoryById.execute(article.categoryId) : null,
     container.getRelatedArticles.execute(article.id, article.categoryId, 4),
+    article.authorId ? container.getAuthorById.execute(article.authorId) : null,
   ]);
+
+  // لو المقال ملوش author محدد صراحة، بنستخدم الكاتب الافتراضي للموقع (Shindy)
+  const author = explicitAuthor ?? (await container.getDefaultAuthor.execute());
 
   const recommendedArticles = relatedArticles;
 
@@ -98,6 +102,24 @@ export default async function ArticlePage({ params }: Props) {
         )}
 
         <h1>{article.title}</h1>
+
+        {author && (
+          <div className="not-prose mb-2 flex items-center gap-3">
+            {author.avatarUrl && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={author.avatarUrl}
+                alt={author.name}
+                className="h-10 w-10 rounded-full object-cover"
+              />
+            )}
+            <div>
+              <p className="text-sm font-semibold text-gray-800">By {author.name}</p>
+              {author.bio && <p className="text-xs text-gray-500">{author.bio}</p>}
+            </div>
+          </div>
+        )}
+
         {article.readingTimeMinutes && (
           <p className="text-sm text-gray-500">{article.readingTimeMinutes} min read</p>
         )}

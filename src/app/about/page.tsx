@@ -14,8 +14,8 @@ export default function AboutPage() {
       <h1>About TrendSphere</h1>
 
       <p>
-        TrendSphere is an independent publication covering today's biggest trending stories
-        across politics, technology, sports, business, and culture. We publish clear,
+        TrendSphere is an independent publication covering US sports, concerts and live
+        events, money and business news, and entertainment. We publish clear,
         well-researched articles aimed at helping readers quickly understand what's happening
         and why it matters.
       </p>
@@ -30,9 +30,9 @@ export default function AboutPage() {
       <h2>Who's Behind TrendSphere</h2>
       <p>
         TrendSphere is founded and run by Muhammad Gharib, an independent publisher focused on
-        making today's biggest trending stories clear and accessible to everyday readers.
-        TrendSphere started in 2026 with a simple idea: build a publication that respects
-        readers' time and intelligence.
+        making the stories that matter to American sports fans, concertgoers, and everyday
+        readers clear and accessible. TrendSphere started in 2026 with a simple idea: build a
+        publication that respects readers' time and intelligence.
       </p>
 
       <h2>How We Create Our Content</h2>

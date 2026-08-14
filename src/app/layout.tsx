@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: "%s | TrendSphere",
     },
     description:
-      "An intelligent publishing platform that turns every article into a full content network.",
+      "Your source for US sports, concerts and live events, money and business news, movies, and Powerball results.",
     alternates: {
       canonical: "/",
       types: { "application/rss+xml": "/rss.xml" },
