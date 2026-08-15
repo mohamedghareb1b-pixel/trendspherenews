@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { container } from "@/lib/container";
 import { getSiteUrl } from "@/lib/site";
+import { addHeadingAnchors } from "@/lib/addHeadingAnchors";
 import type { Tag } from "@/domain/entities/Tag";
 import type { Article, FaqItem } from "@/domain/entities/Article";
 import {
@@ -67,6 +68,8 @@ export default async function ArticlePage({ params }: Props) {
   const author = explicitAuthor ?? (await container.getDefaultAuthor.execute());
 
   const recommendedArticles = relatedArticles;
+
+  const contentAnchors = addHeadingAnchors(article.content);
 
   const faq = faqJsonLd(article.faq);
   const breadcrumb = breadcrumbJsonLd([
@@ -146,7 +149,23 @@ export default async function ArticlePage({ params }: Props) {
           <AdSlot slotKey="article_top" />
         </div>
 
-        <div dangerouslySetInnerHTML={{ __html: article.content }} />
+        {/* أزرار القفز السريع - بتظهر تلقائيًا بس لو المقال فيه أكتر من عنوان
+            فرعي واحد (زي مقالات الـ Roundup اللي فيها كذا حفلة/مناسبة) */}
+        {contentAnchors.anchors.length > 1 && (
+          <nav className="not-prose flex flex-wrap gap-2 rounded-xl border border-gray-100 bg-gray-50 p-3">
+            {contentAnchors.anchors.map((anchor, i) => (
+              <a
+                key={anchor.id}
+                href={`#${anchor.id}`}
+                className="rounded-full bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-sm ring-1 ring-gray-200 hover:bg-brand-50"
+              >
+                {i + 1}. {anchor.text}
+              </a>
+            ))}
+          </nav>
+        )}
+
+        <div dangerouslySetInnerHTML={{ __html: contentAnchors.html }} />
 
         {article.ticketLink && (
           <p className="not-prose text-gray-700">
