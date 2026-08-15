@@ -138,15 +138,6 @@ export default async function ArticlePage({ params }: Props) {
           <p className="text-sm text-gray-500">{article.readingTimeMinutes} min read</p>
         )}
 
-        {article.aiSummary && (
-          <div className="not-prose rounded-xl border-l-4 border-brand-500 bg-brand-50 p-4">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-brand-700">
-              Quick Answer
-            </p>
-            <p className="text-gray-800">{article.aiSummary}</p>
-          </div>
-        )}
-
         {article.heroImageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -154,6 +145,15 @@ export default async function ArticlePage({ params }: Props) {
             alt={article.title}
             className="not-prose w-full rounded-xl object-cover"
           />
+        )}
+
+        {article.aiSummary && (
+          <div className="not-prose rounded-xl border-l-4 border-brand-500 bg-brand-50 p-4">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-brand-700">
+              Quick Answer
+            </p>
+            <p className="text-gray-800">{article.aiSummary}</p>
+          </div>
         )}
 
         <div className="not-prose">
