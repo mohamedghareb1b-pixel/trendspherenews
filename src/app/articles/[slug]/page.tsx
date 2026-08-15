@@ -69,7 +69,18 @@ export default async function ArticlePage({ params }: Props) {
 
   const recommendedArticles = relatedArticles;
 
-  const contentAnchors = addHeadingAnchors(article.content);
+  // بنحلل الجزء الأول والتاني مع بعض، عشان أزرار القفز السريع تشمل
+  // كل الحفلات/الأقسام في المقال، مش الجزء الأول بس
+  const contentPart1Anchors = addHeadingAnchors(article.content);
+  const contentPart2Anchors = article.contentPart2
+    ? addHeadingAnchors(article.contentPart2, contentPart1Anchors.anchors.length)
+    : { html: "", anchors: [] };
+
+  const contentAnchors = {
+    part1Html: contentPart1Anchors.html,
+    part2Html: contentPart2Anchors.html,
+    anchors: [...contentPart1Anchors.anchors, ...contentPart2Anchors.anchors],
+  };
 
   const faq = faqJsonLd(article.faq);
   const breadcrumb = breadcrumbJsonLd([
@@ -165,7 +176,7 @@ export default async function ArticlePage({ params }: Props) {
           </nav>
         )}
 
-        <div dangerouslySetInnerHTML={{ __html: contentAnchors.html }} />
+        <div dangerouslySetInnerHTML={{ __html: contentAnchors.part1Html }} />
 
         {article.ticketLink && (
           <p className="not-prose text-gray-700">
@@ -199,7 +210,7 @@ export default async function ArticlePage({ params }: Props) {
         {article.contentPart2 && (
           <>
             <NewsletterInlinePrompt />
-            <div dangerouslySetInnerHTML={{ __html: article.contentPart2 }} />
+            <div dangerouslySetInnerHTML={{ __html: contentAnchors.part2Html }} />
           </>
         )}
 

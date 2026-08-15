@@ -27,17 +27,20 @@ function slugifyHeading(text: string, index: number): string {
   return base ? `event-${index}-${base}` : `event-${index}`;
 }
 
-export function addHeadingAnchors(html: string): {
+export function addHeadingAnchors(
+  html: string,
+  startIndex = 0
+): {
   html: string;
   anchors: HeadingAnchor[];
 } {
   const anchors: HeadingAnchor[] = [];
-  let index = 0;
+  let index = startIndex;
 
   const processedHtml = html.replace(
     /<h2([^>]*)>(.*?)<\/h2>/gi,
     (match, attrs, innerText) => {
-      if (index >= MAX_ANCHORS) return match; // بعد أول 6، سيب الباقي زي ما هو من غير id
+      if (index >= MAX_ANCHORS) return match; // بعد أول 6 إجمالي، سيب الباقي زي ما هو من غير id
 
       const plainText = innerText.replace(/<[^>]+>/g, "").trim();
       if (!plainText) return match;
