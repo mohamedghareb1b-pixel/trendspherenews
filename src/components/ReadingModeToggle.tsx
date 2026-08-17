@@ -18,7 +18,7 @@ export function ReadingModeToggle() {
   return (
     <button
       onClick={() => setSepia((s) => !s)}
-      className={`not-prose mb-4 flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
+      className={`not-prose flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
         sepia
           ? "border-amber-300 bg-amber-100 text-amber-800"
           : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"

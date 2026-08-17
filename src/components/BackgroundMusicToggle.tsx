@@ -29,7 +29,7 @@ export function BackgroundMusicToggle({ musicUrl }: BackgroundMusicToggleProps) 
       <audio ref={audioRef} src={musicUrl} loop preload="none" />
       <button
         onClick={toggle}
-        className={`not-prose mb-4 ml-2 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
+        className={`not-prose inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition ${
           playing
             ? "border-brand-300 bg-brand-50 text-brand-700"
             : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
