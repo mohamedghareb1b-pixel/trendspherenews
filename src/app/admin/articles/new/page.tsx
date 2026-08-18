@@ -98,6 +98,34 @@ export default async function NewArticlePage() {
           />
         </div>
 
+        {/* Matches schedule table (optional - for team monthly roundups) */}
+        <div>
+          <label className="mb-1 block text-sm font-medium">
+            Matches Table <span className="font-normal text-gray-400">(optional - team schedule roundups)</span>
+          </label>
+          <p className="mb-2 text-xs text-gray-500">
+            One match per line. Fields separated by | in this exact order:{" "}
+            <code className="rounded bg-gray-100 px-1">
+              Opponent | Date | Time | Venue | City | State | Status | Ticket Link (optional)
+            </code>
+            <br />
+            Example:{" "}
+            <code className="rounded bg-gray-100 px-1">
+              Eagles | 2026-08-03 | 8:00 PM ET | Lincoln Financial Field | Philadelphia | PA |
+              Upcoming | https://tickets.com/...
+            </code>
+            <br />
+            If filled, a responsive table appears automatically right after Quick Answer (turns
+            into stacked cards on mobile). Leave empty for regular articles.
+          </p>
+          <textarea
+            name="matchesData"
+            rows={5}
+            placeholder="Eagles | 2026-08-03 | 8:00 PM ET | Lincoln Financial Field | Philadelphia | PA | Upcoming | https://tickets.com/..."
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 font-mono text-xs"
+          />
+        </div>
+
         {/* Secondary image - shown in the middle of the article, between the two content parts */}
         <ImageUploadField
           name="secondaryImageUrl"

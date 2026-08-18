@@ -6,6 +6,7 @@ import { AuthProvider } from "@/components/AuthProvider";
 import { getSiteUrl } from "@/lib/site";
 import { organizationJsonLd, websiteJsonLd, jsonLdScriptProps } from "@/lib/seo";
 import { AnalyticsScripts } from "@/components/AnalyticsScripts";
+import { SovrnScript } from "@/components/SovrnScript";
 import { AdSlot } from "@/components/AdSlot";
 import { CookieConsent } from "@/components/CookieConsent";
 import { container } from "@/lib/container";
@@ -54,8 +55,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <AnalyticsScripts
           gaId={settings[SITE_SETTING_KEYS.GA_MEASUREMENT_ID]}
           clarityId={settings[SITE_SETTING_KEYS.CLARITY_ID]}
-          sovrnKey={settings[SITE_SETTING_KEYS.SOVRN_KEY]}
         />
+        <SovrnScript sovrnKey={settings[SITE_SETTING_KEYS.SOVRN_KEY]} />
         <script {...jsonLdScriptProps(organizationJsonLd())} />
         <script {...jsonLdScriptProps(websiteJsonLd())} />
         <AuthProvider>

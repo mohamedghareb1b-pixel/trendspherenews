@@ -191,8 +191,9 @@ export default async function ArticlePage({ params }: Props) {
             >
               here
             </a>{" "}
-            on TicketNetwork. Resale tickets may still be available even when standard tickets
-            are sold out, although resale prices can be higher than face value.
+            on {settings[SITE_SETTING_KEYS.TICKET_PLATFORM_NAME]}. Resale tickets may still be
+            available even when standard tickets are sold out, although resale prices can be
+            higher than face value.
           </p>
         )}
 

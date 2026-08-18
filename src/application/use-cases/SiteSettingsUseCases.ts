@@ -8,6 +8,7 @@ export const SITE_SETTING_KEYS = {
   BING_SITE_VERIFICATION: "bing_site_verification",
   IMPACT_SITE_VERIFICATION: "impact_site_verification",
   SOVRN_KEY: "sovrn_key",
+  TICKET_PLATFORM_NAME: "ticket_platform_name",
   ADSENSE_PUBLISHER_ID: "adsense_publisher_id",
   SOCIAL_THREADS_URL: "social_threads_url",
   SOCIAL_FACEBOOK_URL: "social_facebook_url",
@@ -50,6 +51,8 @@ export class GetSiteSettingsUseCase {
         dbSettings[SITE_SETTING_KEYS.SOVRN_KEY] ??
         process.env.NEXT_PUBLIC_SOVRN_KEY ??
         "",
+      [SITE_SETTING_KEYS.TICKET_PLATFORM_NAME]:
+        dbSettings[SITE_SETTING_KEYS.TICKET_PLATFORM_NAME] ?? "TicketNetwork",
       [SITE_SETTING_KEYS.ADSENSE_PUBLISHER_ID]:
         dbSettings[SITE_SETTING_KEYS.ADSENSE_PUBLISHER_ID] ??
         process.env.ADSENSE_PUBLISHER_ID ??

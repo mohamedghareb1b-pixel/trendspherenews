@@ -8,6 +8,7 @@ export interface CreateArticleInput {
   content: string;
   contentPart2?: string;
   ticketLink?: string;
+  matchesData?: string;
   authorId?: string;
   categoryId?: string;
   excerpt?: string;
@@ -53,7 +54,8 @@ export class CreateArticleUseCase {
       new Date(),
       new Date(),
       input.contentPart2 ?? null,
-      input.ticketLink ?? null
+      input.ticketLink ?? null,
+      input.matchesData ?? null
     );
 
     article.calculateReadingTime();

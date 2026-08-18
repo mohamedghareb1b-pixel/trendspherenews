@@ -37,6 +37,7 @@ export async function createArticleAction(formData: FormData) {
   const content = String(formData.get("content") ?? "");
   const contentPart2 = String(formData.get("contentPart2") ?? "");
   const ticketLink = String(formData.get("ticketLink") ?? "");
+  const matchesData = String(formData.get("matchesData") ?? "");
   const excerpt = String(formData.get("excerpt") ?? "");
   const heroImageUrl = String(formData.get("heroImageUrl") ?? "");
   const secondaryImageUrl = String(formData.get("secondaryImageUrl") ?? "");
@@ -52,6 +53,7 @@ export async function createArticleAction(formData: FormData) {
     content,
     contentPart2: contentPart2 || undefined,
     ticketLink: ticketLink || undefined,
+    matchesData: matchesData || undefined,
     excerpt: excerpt || undefined,
     heroImageUrl: heroImageUrl || undefined,
     secondaryImageUrl: secondaryImageUrl || undefined,
@@ -83,6 +85,7 @@ export async function updateArticleAction(articleId: string, formData: FormData)
     content: String(formData.get("content") ?? "") || undefined,
     contentPart2: String(formData.get("contentPart2") ?? "") || undefined,
     ticketLink: String(formData.get("ticketLink") ?? "") || undefined,
+    matchesData: String(formData.get("matchesData") ?? "") || undefined,
     excerpt: String(formData.get("excerpt") ?? "") || undefined,
     heroImageUrl: String(formData.get("heroImageUrl") ?? "") || undefined,
     secondaryImageUrl: String(formData.get("secondaryImageUrl") ?? "") || undefined,
@@ -169,6 +172,7 @@ export async function updateSiteSettingsAction(formData: FormData) {
     "social_substack_url",
     "header_badge_text",
     "background_music_url",
+    "ticket_platform_name",
   ];
 
   for (const key of keys) {

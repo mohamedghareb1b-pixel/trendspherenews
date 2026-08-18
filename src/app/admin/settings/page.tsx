@@ -63,6 +63,26 @@ export default async function SettingsPage() {
               />
             </div>
           </div>
+        </div>
+
+        <div className="rounded-xl border border-gray-100 p-4">
+          <h2 className="mb-3 font-medium">Monetization</h2>
+          <div className="space-y-3">
+            <div>
+              <label className="mb-1 block text-sm">Ticket Platform Name</label>
+              <p className="mb-2 text-xs text-gray-500">
+                The name shown in the automatic ticket-availability sentence on articles (e.g.
+                &quot;on TicketNetwork&quot;). Change this if you switch to a different ticket
+                platform later — no code changes needed.
+              </p>
+              <input
+                name="ticket_platform_name"
+                defaultValue={settings[SITE_SETTING_KEYS.TICKET_PLATFORM_NAME]}
+                placeholder="TicketNetwork"
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm"
+              />
+            </div>
+          </div>
           <p className="mt-2 text-xs text-gray-400">
             These only load after a visitor accepts cookies from the consent banner.
           </p>
