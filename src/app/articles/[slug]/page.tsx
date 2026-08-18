@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { container } from "@/lib/container";
 import { getSiteUrl } from "@/lib/site";
 import { addHeadingAnchors } from "@/lib/addHeadingAnchors";
-import { MatchesTable } from "@/components/MatchesTable";
 import type { Tag } from "@/domain/entities/Tag";
 import type { Article, FaqItem } from "@/domain/entities/Article";
 import {
@@ -118,7 +117,7 @@ export default async function ArticlePage({ params }: Props) {
           </a>
         )}
 
-        <h1>{article.title}</h1>
+        <h1 className="text-2xl leading-tight sm:text-3xl md:text-4xl">{article.title}</h1>
 
         {author && (
           <div className="not-prose mb-2 flex items-center gap-3">
@@ -158,8 +157,6 @@ export default async function ArticlePage({ params }: Props) {
             <p className="text-gray-800">{article.aiSummary}</p>
           </div>
         )}
-
-        {article.matchesData && <MatchesTable data={article.matchesData} />}
 
         <div className="not-prose">
           <AdSlot slotKey="article_top" />
