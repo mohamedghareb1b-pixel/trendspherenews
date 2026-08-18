@@ -31,8 +31,7 @@ export class Article {
     public createdAt: Date = new Date(),
     public updatedAt: Date = new Date(),
     public contentPart2: string | null = null,
-    public ticketLink: string | null = null,
-    public matchesData: string | null = null
+    public ticketLink: string | null = null
   ) {}
 
   publish(): void {

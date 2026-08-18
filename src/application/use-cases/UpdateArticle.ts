@@ -6,7 +6,6 @@ export interface UpdateArticleInput {
   content?: string;
   contentPart2?: string;
   ticketLink?: string;
-  matchesData?: string;
   excerpt?: string;
   heroImageUrl?: string;
   secondaryImageUrl?: string;
@@ -36,7 +35,6 @@ export class UpdateArticleUseCase {
     }
     if (input.excerpt !== undefined) article.excerpt = input.excerpt;
     if (input.ticketLink !== undefined) article.ticketLink = input.ticketLink;
-    if (input.matchesData !== undefined) article.matchesData = input.matchesData;
     if (input.heroImageUrl !== undefined) article.heroImageUrl = input.heroImageUrl;
     if (input.secondaryImageUrl !== undefined) article.secondaryImageUrl = input.secondaryImageUrl;
     if (input.metaTitle !== undefined) article.metaTitle = input.metaTitle;

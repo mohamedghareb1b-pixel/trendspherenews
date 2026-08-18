@@ -30,8 +30,7 @@ export function articleRowToDomain(row: ArticleRow): Article {
     row.createdAt,
     row.updatedAt,
     row.contentPart2,
-    row.ticketLink,
-    row.matchesData
+    row.ticketLink
   );
 }
 
@@ -74,7 +73,6 @@ export class DrizzleArticleRepository implements ArticleRepository {
         content: article.content,
         contentPart2: article.contentPart2,
         ticketLink: article.ticketLink,
-        matchesData: article.matchesData,
         status: article.status,
         authorId: article.authorId ?? undefined,
         categoryId: article.categoryId ?? undefined,
@@ -99,7 +97,6 @@ export class DrizzleArticleRepository implements ArticleRepository {
         content: article.content,
         contentPart2: article.contentPart2,
         ticketLink: article.ticketLink,
-        matchesData: article.matchesData,
         status: article.status,
         excerpt: article.excerpt,
         heroImageUrl: article.heroImageUrl,
