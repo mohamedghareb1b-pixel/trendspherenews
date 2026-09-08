@@ -1,5 +1,5 @@
-export const CONSENT_KEY = "trendsphere_cookie_consent";
-export const CONSENT_EVENT = "trendsphere-consent-changed";
+export const CONSENT_KEY = "shekss_cookie_consent";
+export const CONSENT_EVENT = "shekss-consent-changed";
 
 export type ConsentValue = "granted" | "denied";
 
