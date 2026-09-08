@@ -26,6 +26,7 @@ export class NotifySubscribersOfNewArticleUseCase {
           title: article.title,
           slug: article.slug,
           excerpt: article.excerpt,
+          type: article.type,
         });
       } catch {
         // فشل إرسال لمشترك واحد مش لازم يوقف الباقي

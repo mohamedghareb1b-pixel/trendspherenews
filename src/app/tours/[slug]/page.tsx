@@ -10,6 +10,7 @@ import {
   articleJsonLd,
   faqJsonLd,
   breadcrumbJsonLd,
+  tourEventsJsonLd,
   jsonLdScriptProps,
 } from "@/lib/seo";
 import { ViewTracker } from "@/components/ViewTracker";
@@ -18,6 +19,7 @@ import { SocialFollowPrompt } from "@/components/SocialFollowPrompt";
 import { ReadingModeToggle } from "@/components/ReadingModeToggle";
 import { BackgroundMusicToggle } from "@/components/BackgroundMusicToggle";
 import { NewsletterInlinePrompt } from "@/components/NewsletterInlinePrompt";
+import { TourEventsTable } from "@/components/TourEventsTable";
 import { SITE_SETTING_KEYS } from "@/application/use-cases/SiteSettingsUseCases";
 
 interface Props {
@@ -26,9 +28,9 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = await container.getArticleBySlug.execute(params.slug);
-  if (!article || article.type === "tour") return {};
+  if (!article || article.type !== "tour") return {};
 
-  const url = `${getSiteUrl()}/articles/${article.slug}`;
+  const url = `${getSiteUrl()}/tours/${article.slug}`;
 
   return {
     title: article.metaTitle ?? article.title,
@@ -53,9 +55,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const revalidate = 60;
 
-export default async function ArticlePage({ params }: Props) {
+export default async function TourArticlePage({ params }: Props) {
   const article = await container.getArticleBySlug.execute(params.slug);
-  if (!article || !article.isPublished() || article.type === "tour") notFound();
+  if (!article || !article.isPublished() || article.type !== "tour") notFound();
 
   const [tags, category, relatedArticles, explicitAuthor] = await Promise.all([
     container.getArticleTags.execute(article.id),
@@ -64,35 +66,25 @@ export default async function ArticlePage({ params }: Props) {
     article.authorId ? container.getAuthorById.execute(article.authorId) : null,
   ]);
 
-  // لو المقال ملوش author محدد صراحة، بنستخدم الكاتب الافتراضي للموقع (Shindy)
   const author = explicitAuthor ?? (await container.getDefaultAuthor.execute());
 
-  const recommendedArticles = relatedArticles;
-
-  // بنحلل الجزء الأول والتاني مع بعض، عشان أزرار القفز السريع تشمل
-  // كل الحفلات/الأقسام في المقال، مش الجزء الأول بس
   const contentPart1Anchors = addHeadingAnchors(article.content);
   const contentPart2Anchors = article.contentPart2
     ? addHeadingAnchors(article.contentPart2, contentPart1Anchors.anchors.length)
     : { html: "", anchors: [] };
 
-  const contentAnchors = {
-    part1Html: contentPart1Anchors.html,
-    part2Html: contentPart2Anchors.html,
-    anchors: [...contentPart1Anchors.anchors, ...contentPart2Anchors.anchors],
-  };
-
   const faq = faqJsonLd(article.faq);
   const breadcrumb = breadcrumbJsonLd([
     { name: "Home", url: getSiteUrl() },
-    { name: article.title, url: `${getSiteUrl()}/articles/${article.slug}` },
+    { name: article.title, url: `${getSiteUrl()}/tours/${article.slug}` },
   ]);
+  const tourEvents = tourEventsJsonLd(article, article.tourEvents);
 
   const settings = await container.getSiteSettings.execute();
 
   return (
     <>
-      <ViewTracker articleId={article.id} path={`/articles/${article.slug}`} />
+      <ViewTracker articleId={article.id} path={`/tours/${article.slug}`} />
       <SocialFollowPrompt
         threadsUrl={settings[SITE_SETTING_KEYS.SOCIAL_THREADS_URL]}
         facebookUrl={settings[SITE_SETTING_KEYS.SOCIAL_FACEBOOK_URL]}
@@ -102,6 +94,10 @@ export default async function ArticlePage({ params }: Props) {
       <script {...jsonLdScriptProps(articleJsonLd(article))} />
       <script {...jsonLdScriptProps(breadcrumb)} />
       {faq && <script {...jsonLdScriptProps(faq)} />}
+      {tourEvents.map((event, i) => (
+        // eslint-disable-next-line react/no-array-index-key
+        <script key={i} {...jsonLdScriptProps(event)} />
+      ))}
 
       <article className="prose prose-lg max-w-none">
         <div className="not-prose flex flex-wrap items-center gap-2">
@@ -162,40 +158,10 @@ export default async function ArticlePage({ params }: Props) {
           <AdSlot slotKey="article_top" />
         </div>
 
-        {/* أزرار القفز السريع - بتظهر تلقائيًا بس لو المقال فيه أكتر من عنوان
-            فرعي واحد (زي مقالات الـ Roundup اللي فيها كذا حفلة/مناسبة) */}
-        {contentAnchors.anchors.length > 1 && (
-          <nav className="not-prose flex flex-wrap gap-2 rounded-xl border border-gray-100 bg-gray-50 p-3">
-            {contentAnchors.anchors.map((anchor, i) => (
-              <a
-                key={anchor.id}
-                href={`#${anchor.id}`}
-                className="rounded-full bg-white px-3 py-1.5 text-sm font-medium text-brand-700 shadow-sm ring-1 ring-gray-200 hover:bg-brand-50"
-              >
-                {i + 1}. {anchor.text}
-              </a>
-            ))}
-          </nav>
-        )}
+        <div dangerouslySetInnerHTML={{ __html: contentPart1Anchors.html }} />
 
-        <div dangerouslySetInnerHTML={{ __html: contentAnchors.part1Html }} />
-
-        {article.ticketLink && (
-          <p className="not-prose text-gray-700">
-            Still looking for tickets? Check current ticket availability{" "}
-            <a
-              href={article.ticketLink}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="font-semibold text-base underline decoration-2 underline-offset-2 text-brand-700 hover:text-brand-900"
-            >
-              here
-            </a>{" "}
-            on {settings[SITE_SETTING_KEYS.TICKET_PLATFORM_NAME]}. Resale tickets may still be
-            available even when standard tickets are sold out, although resale prices can be
-            higher than face value.
-          </p>
-        )}
+        <h2>Tour Dates</h2>
+        <TourEventsTable events={article.tourEvents} />
 
         {article.secondaryImageUrl && (
           // eslint-disable-next-line @next/next/no-img-element
@@ -213,7 +179,7 @@ export default async function ArticlePage({ params }: Props) {
         {article.contentPart2 && (
           <>
             <NewsletterInlinePrompt />
-            <div dangerouslySetInnerHTML={{ __html: contentAnchors.part2Html }} />
+            <div dangerouslySetInnerHTML={{ __html: contentPart2Anchors.html }} />
           </>
         )}
 
@@ -249,11 +215,11 @@ export default async function ArticlePage({ params }: Props) {
           ))}
         </div>
 
-        {recommendedArticles.length > 0 && (
+        {relatedArticles.length > 0 && (
           <div className="not-prose mt-8 border-t border-gray-100 pt-6">
             <h2 className="mb-4 text-xl font-bold">Related Articles</h2>
             <div className="grid gap-4 sm:grid-cols-2">
-              {recommendedArticles.map((rec: Article) => (
+              {relatedArticles.map((rec: Article) => (
                 <Link
                   key={rec.id}
                   href={articleHref(rec)}

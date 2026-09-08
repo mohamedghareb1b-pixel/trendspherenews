@@ -1,5 +1,5 @@
 import { container } from "@/lib/container";
-import { getSiteUrl, SITE_NAME } from "@/lib/site";
+import { getSiteUrl, SITE_NAME, articleHref } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -21,8 +21,8 @@ export async function GET() {
       (article) => `
     <item>
       <title>${escapeXml(article.title)}</title>
-      <link>${site}/articles/${article.slug}</link>
-      <guid isPermaLink="true">${site}/articles/${article.slug}</guid>
+      <link>${site}${articleHref(article)}</link>
+      <guid isPermaLink="true">${site}${articleHref(article)}</guid>
       <description>${escapeXml(article.excerpt ?? "")}</description>
       <pubDate>${(article.publishedAt ?? article.createdAt).toUTCString()}</pubDate>
     </item>`

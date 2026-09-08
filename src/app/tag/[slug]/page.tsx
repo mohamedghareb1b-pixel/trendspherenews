@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { container } from "@/lib/container";
 import { breadcrumbJsonLd, jsonLdScriptProps } from "@/lib/seo";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl, articleHref } from "@/lib/site";
 
 interface Props {
   params: { slug: string };
@@ -43,7 +43,7 @@ export default async function TagPage({ params }: Props) {
         {articles.map((article) => (
           <Link
             key={article.id}
-            href={`/articles/${article.slug}`}
+            href={articleHref(article)}
             className="rounded-xl border border-gray-100 p-5 transition hover:shadow-md"
           >
             <h2 className="text-lg font-semibold">{article.title}</h2>

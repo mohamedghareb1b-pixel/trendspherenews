@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about TrendSphere, our mission, and how we create our content.",
+  description: "Learn about Shekss, our mission, and how we create our content.",
   robots: { index: true, follow: true },
 };
 
@@ -11,10 +11,10 @@ const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "contact@example.com";
 export default function AboutPage() {
   return (
     <article className="prose prose-lg max-w-none">
-      <h1>About TrendSphere</h1>
+      <h1>About Shekss</h1>
 
       <p>
-        TrendSphere is an independent publication covering US sports, concerts and live
+        Shekss is an independent publication covering US sports, concerts and live
         events, money and business news, and entertainment. We publish clear,
         well-researched articles aimed at helping readers quickly understand what's happening
         and why it matters.
@@ -27,11 +27,11 @@ export default function AboutPage() {
         backed by credible sources.
       </p>
 
-      <h2>Who's Behind TrendSphere</h2>
+      <h2>Who's Behind Shekss</h2>
       <p>
-        TrendSphere is founded and run by Muhammad Gharib, an independent publisher focused on
+        Shekss is founded and run by Muhammad Gharib, an independent publisher focused on
         making the stories that matter to American sports fans, concertgoers, and everyday
-        readers clear and accessible. TrendSphere started in 2026 with a simple idea: build a
+        readers clear and accessible. Shekss started in 2026 with a simple idea: build a
         publication that respects readers' time and intelligence.
       </p>
 

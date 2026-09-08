@@ -14,7 +14,7 @@ export default function TermsOfServicePage() {
       <p className="text-sm text-gray-500">Last updated: {new Date().toLocaleDateString("en-US")}</p>
 
       <p>
-        By accessing or using TrendSphere (&quot;the Service&quot;), you agree to be bound by
+        By accessing or using Shekss (&quot;the Service&quot;), you agree to be bound by
         these Terms of Service. If you do not agree, please do not use the Service.
       </p>
 
@@ -28,7 +28,7 @@ export default function TermsOfServicePage() {
       <h2>2. Content</h2>
       <p>
         All articles, images, and other content published on the Service are owned by
-        TrendSphere or its licensors, unless otherwise noted, and are protected by copyright and
+        Shekss or its licensors, unless otherwise noted, and are protected by copyright and
         other intellectual property laws. You may not reproduce or redistribute our content
         without permission, except for personal, non-commercial use with proper attribution.
       </p>
@@ -56,7 +56,7 @@ export default function TermsOfServicePage() {
 
       <h2>6. Limitation of Liability</h2>
       <p>
-        To the fullest extent permitted by law, TrendSphere shall not be liable for any indirect,
+        To the fullest extent permitted by law, Shekss shall not be liable for any indirect,
         incidental, special, consequential, or punitive damages arising from your use of the
         Service.
       </p>
@@ -70,7 +70,7 @@ export default function TermsOfServicePage() {
       <h2>8. Governing Law</h2>
       <p>
         These Terms are governed by the laws of the United States and the state in which
-        TrendSphere is registered, without regard to conflict-of-law principles.
+        Shekss is registered, without regard to conflict-of-law principles.
       </p>
 
       <h2>9. Changes to These Terms</h2>

@@ -14,7 +14,7 @@ export async function sendVerificationEmail(email: string, token: string) {
   await getTransporter().sendMail({
     to: email,
     from: process.env.EMAIL_FROM,
-    subject: "Confirm your subscription to TrendSphere",
+    subject: "Confirm your subscription to Shekss",
     html: `
       <div style="font-family: sans-serif;">
         <h2>One step left!</h2>
@@ -32,7 +32,7 @@ export async function sendWelcomeEmail(email: string, unsubscribeToken: string) 
   await getTransporter().sendMail({
     to: email,
     from: process.env.EMAIL_FROM,
-    subject: "Welcome to TrendSphere 🎉",
+    subject: "Welcome to Shekss 🎉",
     html: `
       <div style="font-family: sans-serif;">
         <h2>Your subscription is confirmed</h2>
@@ -82,10 +82,10 @@ export async function sendContactFormEmail(input: {
 export async function sendNewArticleNotification(
   subscriberEmail: string,
   unsubscribeToken: string,
-  article: { title: string; slug: string; excerpt: string | null }
+  article: { title: string; slug: string; excerpt: string | null; type?: string }
 ) {
   const site = getSiteUrl();
-  const link = `${site}/articles/${article.slug}`;
+  const link = `${site}${article.type === "tour" ? "/tours/" : "/articles/"}${article.slug}`;
   const unsubscribeLink = `${site}/api/newsletter/unsubscribe?token=${unsubscribeToken}`;
 
   await getTransporter().sendMail({

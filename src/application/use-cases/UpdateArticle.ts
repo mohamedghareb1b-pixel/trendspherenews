@@ -1,4 +1,5 @@
 import { ArticleRepository } from "@/domain/repositories/ArticleRepository";
+import { TourEvent } from "@/domain/entities/Article";
 
 export interface UpdateArticleInput {
   id: string;
@@ -14,6 +15,7 @@ export interface UpdateArticleInput {
   categoryId?: string;
   aiSummary?: string;
   faq?: { question: string; answer: string }[];
+  tourEvents?: TourEvent[];
 }
 
 export class UpdateArticleUseCase {
@@ -42,6 +44,7 @@ export class UpdateArticleUseCase {
     if (input.categoryId !== undefined) article.categoryId = input.categoryId;
     if (input.aiSummary !== undefined) article.aiSummary = input.aiSummary;
     if (input.faq !== undefined) article.faq = input.faq;
+    if (input.tourEvents !== undefined) article.tourEvents = input.tourEvents;
 
     return this.articleRepository.update(article);
   }

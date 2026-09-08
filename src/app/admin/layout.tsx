@@ -16,6 +16,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <div className="flex items-center justify-between border-b border-gray-100 pb-4">
         <nav className="flex gap-4 text-sm font-medium">
           <Link href="/admin">Articles</Link>
+          <Link href="/admin/tour-articles">Tour Articles</Link>
           <Link href="/admin/categories">Categories</Link>
           <Link href="/admin/tags">Tags</Link>
           <Link href="/admin/analytics">Analytics</Link>
@@ -23,6 +24,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <Link href="/admin/settings">Settings</Link>
           <Link href="/admin/articles/new" className="text-brand-500">
             + New Article
+          </Link>
+          <Link href="/admin/tour-articles/new" className="text-brand-500">
+            + New Tour Article
           </Link>
         </nav>
         <span className="text-xs text-gray-400">

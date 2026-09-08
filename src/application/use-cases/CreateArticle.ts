@@ -1,4 +1,4 @@
-import { Article, FaqItem } from "@/domain/entities/Article";
+import { Article, ArticleType, FaqItem, TourEvent } from "@/domain/entities/Article";
 import { ArticleRepository } from "@/domain/repositories/ArticleRepository";
 import { randomUUID } from "crypto";
 
@@ -17,6 +17,8 @@ export interface CreateArticleInput {
   faq?: FaqItem[];
   metaTitle?: string;
   metaDescription?: string;
+  type?: ArticleType;
+  tourEvents?: TourEvent[];
 }
 
 /**
@@ -53,7 +55,9 @@ export class CreateArticleUseCase {
       new Date(),
       new Date(),
       input.contentPart2 ?? null,
-      input.ticketLink ?? null
+      input.ticketLink ?? null,
+      input.type ?? "standard",
+      input.tourEvents ?? []
     );
 
     article.calculateReadingTime();

@@ -14,7 +14,7 @@ export default function CookiePolicyPage() {
       <p className="text-sm text-gray-500">Last updated: {new Date().toLocaleDateString("en-US")}</p>
 
       <p>
-        This Cookie Policy explains what cookies are, how TrendSphere uses them, and your
+        This Cookie Policy explains what cookies are, how Shekss uses them, and your
         choices.
       </p>
 
@@ -37,7 +37,7 @@ export default function CookiePolicyPage() {
           <tr>
             <td>Strictly necessary</td>
             <td>Internal admin sign-in session (not used by regular visitors)</td>
-            <td>TrendSphere</td>
+            <td>Shekss</td>
           </tr>
           <tr>
             <td>Analytics</td>
@@ -52,7 +52,7 @@ export default function CookiePolicyPage() {
           <tr>
             <td>Preferences</td>
             <td>Remember your cookie consent choice</td>
-            <td>TrendSphere</td>
+            <td>Shekss</td>
           </tr>
         </tbody>
       </table>

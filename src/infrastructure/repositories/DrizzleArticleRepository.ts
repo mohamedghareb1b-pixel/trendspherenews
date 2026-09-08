@@ -1,7 +1,7 @@
 import { and, eq, ilike, desc } from "drizzle-orm";
 import { db } from "../db/client";
 import { articles } from "../db/schema";
-import { Article, ArticleStatus, FaqItem } from "@/domain/entities/Article";
+import { Article, ArticleStatus, ArticleType, FaqItem, TourEvent } from "@/domain/entities/Article";
 import {
   ArticleListFilters,
   ArticleRepository,
@@ -30,7 +30,9 @@ export function articleRowToDomain(row: ArticleRow): Article {
     row.createdAt,
     row.updatedAt,
     row.contentPart2,
-    row.ticketLink
+    row.ticketLink,
+    (row.type as ArticleType) ?? "standard",
+    (row.tourEvents as TourEvent[]) ?? []
   );
 }
 
@@ -51,6 +53,7 @@ export class DrizzleArticleRepository implements ArticleRepository {
     if (filters.categoryId) conditions.push(eq(articles.categoryId, filters.categoryId));
     if (filters.authorId) conditions.push(eq(articles.authorId, filters.authorId));
     if (filters.search) conditions.push(ilike(articles.title, `%${filters.search}%`));
+    if (filters.type) conditions.push(eq(articles.type, filters.type as ArticleType));
 
     const rows = await db
       .select()
@@ -73,6 +76,8 @@ export class DrizzleArticleRepository implements ArticleRepository {
         content: article.content,
         contentPart2: article.contentPart2,
         ticketLink: article.ticketLink,
+        type: article.type,
+        tourEvents: article.tourEvents,
         status: article.status,
         authorId: article.authorId ?? undefined,
         categoryId: article.categoryId ?? undefined,
@@ -97,6 +102,7 @@ export class DrizzleArticleRepository implements ArticleRepository {
         content: article.content,
         contentPart2: article.contentPart2,
         ticketLink: article.ticketLink,
+        tourEvents: article.tourEvents,
         status: article.status,
         excerpt: article.excerpt,
         heroImageUrl: article.heroImageUrl,

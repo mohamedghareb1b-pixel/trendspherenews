@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { container } from "@/lib/container";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl, articleHref } from "@/lib/site";
 
 export const revalidate = 300; // يتحدث كل 5 دقايق بدل ساعة - عشان المقالات الجديدة تتفهرس أسرع
 
@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => ({
-    url: `${site}/articles/${article.slug}`,
+    url: `${site}${articleHref(article)}`,
     ...(article.updatedAt ? { lastModified: new Date(article.updatedAt) } : {}),
     changeFrequency: "daily",
     priority: 0.8,

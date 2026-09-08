@@ -27,6 +27,9 @@ export const userRoleEnum = pgEnum("user_role", [
   "reader",
 ]);
 
+// "standard" = مقال عادي، "tour" = مقال "ارتيكل 2" (روند حفلات كامل)
+export const articleTypeEnum = pgEnum("article_type", ["standard", "tour"]);
+
 // -------------------- Auth: Users --------------------
 // بنية متوافقة مع next-auth Drizzle Adapter + حقل role للصلاحيات الداخلية
 export const users = pgTable("users", {
@@ -124,6 +127,12 @@ export const articles = pgTable("articles", {
   ticketLink: text("ticket_link"), // رابط اختياري لبيع التذاكر (ماتشات/حفلات) - بيظهر في نهاية الجزء الأول من المحتوى قبل الصورة الثانية
   heroImageUrl: text("hero_image_url"),
   secondaryImageUrl: text("secondary_image_url"),
+
+  // "ارتيكل 2" - نوع المقال وجدول الحفلات (لو النوع "tour")
+  type: articleTypeEnum("type").default("standard").notNull(),
+  tourEvents: jsonb("tour_events").$type<
+    { date: string; time: string; venue: string; city: string; state: string; ticketLink: string }[]
+  >(),
 
   authorId: uuid("author_id").references(() => authors.id),
   categoryId: uuid("category_id").references(() => categories.id),

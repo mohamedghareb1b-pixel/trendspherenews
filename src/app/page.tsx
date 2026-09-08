@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { container } from "@/lib/container";
 import { AdSlot } from "@/components/AdSlot";
+import { articleHref } from "@/lib/site";
 
 export const revalidate = 60; // ISR - refreshes every minute
 
@@ -62,7 +63,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         {articles.map((article) => (
           <Link
             key={article.id}
-            href={`/articles/${article.slug}`}
+            href={articleHref(article)}
             className="overflow-hidden rounded-xl border border-gray-100 transition hover:shadow-md"
           >
             {article.heroImageUrl && (

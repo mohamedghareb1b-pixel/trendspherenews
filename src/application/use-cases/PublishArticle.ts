@@ -1,6 +1,6 @@
 import { ArticleRepository } from "@/domain/repositories/ArticleRepository";
 import { notifyGoogleIndexing } from "@/lib/googleIndexing";
-import { getSiteUrl } from "@/lib/site";
+import { getSiteUrl, articleHref } from "@/lib/site";
 
 /**
  * ده المكان اللي هيتحط فيه لاحقًا نداء الـ Content Operating System:
@@ -21,7 +21,7 @@ export class PublishArticleUseCase {
     await this.articleRepository.update(article);
 
     // بنبعت إشعار Google Indexing من غير await - عشان زرار "نشر" يرد فورًا
-    const url = `${getSiteUrl()}/articles/${article.slug}`;
+    const url = `${getSiteUrl()}${articleHref(article)}`;
     notifyGoogleIndexing(url, "URL_UPDATED").catch((error) => {
       console.error("Failed to notify Google Indexing:", error);
     });

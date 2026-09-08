@@ -5,6 +5,7 @@ export interface ArticleListFilters {
   authorId?: string;
   status?: string;
   search?: string;
+  type?: string;
   limit?: number;
   offset?: number;
 }
