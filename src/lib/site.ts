@@ -6,9 +6,4 @@ export function getSiteUrl(): string {
   );
 }
 
-export const SITE_NAME = "Shekss";
-
-/** بيرجع الرابط الصح للمقال حسب نوعه: /tours/slug لمقالات "ارتيكل 2"، و/articles/slug للباقي */
-export function articleHref(article: { type?: string; slug: string }): string {
-  return article.type === "tour" ? `/tours/${article.slug}` : `/articles/${article.slug}`;
-}
+export const SITE_NAME = "TrendSphere";

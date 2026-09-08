@@ -14,7 +14,7 @@ export default function AffiliateDisclosurePage() {
       <p className="text-sm text-gray-500">Last updated: {new Date().toLocaleDateString("en-US")}</p>
 
       <p>
-        Shekss participates in affiliate marketing programs, which means we may earn a
+        TrendSphere participates in affiliate marketing programs, which means we may earn a
         commission when you click on certain links and make a purchase or booking through them.
         This comes at no additional cost to you.
       </p>
@@ -30,7 +30,7 @@ export default function AffiliateDisclosurePage() {
 
       <h2>Product and Merchant Links</h2>
       <p>
-        Shekss uses automated affiliate link technology (such as Sovrn Commerce) that may
+        TrendSphere uses automated affiliate link technology (such as Sovrn Commerce) that may
         convert eligible outbound links in our articles into affiliate links. This means some
         links to products, services, or merchants mentioned in our content may generate a
         commission for us if you make a purchase, at no extra cost to you.
@@ -46,7 +46,7 @@ export default function AffiliateDisclosurePage() {
 
       <h2>Transparency Commitment</h2>
       <p>
-        Shekss is committed to being transparent about how we operate and how our content
+        TrendSphere is committed to being transparent about how we operate and how our content
         is produced. Our articles are researched using a mix of AI-assisted research and human
         editorial review before publishing. Any sponsored content, if published, will be clearly
         labeled as such. We do not accept payment in exchange for favorable coverage.

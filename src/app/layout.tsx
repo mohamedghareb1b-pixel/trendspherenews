@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(getSiteUrl()),
     title: {
-      default: "Shekss",
-      template: "%s | Shekss",
+      default: "TrendSphere",
+      template: "%s | TrendSphere",
     },
     description:
       "Your source for US sports, concerts and live events, money and business news, movies, and Powerball results.",
@@ -63,7 +63,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <header className="border-b border-gray-100 py-4">
             <div className="mx-auto flex max-w-5xl items-center gap-3 px-4">
               <Link href="/" className="text-xl font-bold text-brand-700">
-                Shekss
+                TrendSphere
               </Link>
               {settings[SITE_SETTING_KEYS.HEADER_BADGE_TEXT] && (
                 <span className="rounded-full bg-gradient-to-r from-amber-400 to-pink-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
@@ -90,7 +90,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <Link href="/cookie-policy">Cookie Policy</Link>
               <Link href="/dmca">DMCA</Link>
             </nav>
-            © {new Date().getFullYear()} Shekss OS
+            © {new Date().getFullYear()} TrendSphere OS
           </footer>
         </AuthProvider>
         <CookieConsent />

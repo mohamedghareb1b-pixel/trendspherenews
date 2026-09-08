@@ -15,7 +15,7 @@ export default function DmcaPage() {
       <p className="text-sm text-gray-500">Last updated: {new Date().toLocaleDateString("en-US")}</p>
 
       <p>
-        Shekss respects the intellectual property rights of others and expects its users to
+        TrendSphere respects the intellectual property rights of others and expects its users to
         do the same. In accordance with the Digital Millennium Copyright Act of 1998 (&quot;DMCA&quot;),
         we will respond promptly to notices of alleged copyright infringement.
       </p>
@@ -42,7 +42,7 @@ export default function DmcaPage() {
 
       <h2>Designated Agent</h2>
       <p>
-        Shekss
+        TrendSphere
         <br />
         Attn: DMCA Designated Agent
         <br />

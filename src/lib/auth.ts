@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           return {
             id: "admin",
             name: validUsername,
-            email: process.env.ADMIN_EMAIL ?? "admin@shekss.local",
+            email: process.env.ADMIN_EMAIL ?? "admin@trendsphere.local",
             role: "admin",
           };
         }

@@ -3,7 +3,7 @@ import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with the Shekss team.",
+  description: "Get in touch with the TrendSphere team.",
   robots: { index: true, follow: true },
 };
 

@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
       <p className="text-sm text-gray-500">Last updated: {new Date().toLocaleDateString("en-US")}</p>
 
       <p>
-        This Privacy Policy explains how Shekss (&quot;we&quot;, &quot;us&quot;, or
+        This Privacy Policy explains how TrendSphere (&quot;we&quot;, &quot;us&quot;, or
         &quot;our&quot;) collects, uses, and discloses information about visitors to our
         website. We do not require visitors to create an account or sign in to read our
         content.
